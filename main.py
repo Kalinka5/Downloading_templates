@@ -33,12 +33,11 @@ def main(loger):
         driver.implicitly_wait(10)
 
         selenium_login(loger, config, driver)
-        selenium_searching(loger, driver)
-        choose_template("//a[@href='https://hislide.io/product/orbit-modern-powerpoint-template/']", driver, logger)
-        downloading(driver, logger)
-        selenium_searching(loger, driver)
-        choose_template("//a[@href='https://hislide.io/product/halloween-powerpoint-template-free/']", driver, logger)
-        downloading(driver, logger)
+
+        for template in config["templates"]:
+            selenium_searching(loger, driver)
+            choose_template(config["templates"][template]["xpath"], driver, logger)
+            downloading(driver, logger, template, path, config)
 
     finally:
         driver.close()

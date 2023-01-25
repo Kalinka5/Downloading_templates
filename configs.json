@@ -2,5 +2,15 @@
   "HiSlide": {
         "login": "daniil003d@gmail.com",
         "password": "dfhbghdfbgh!45@"
+    },
+  "templates": {
+    "Modern": {
+      "xpath": "//a[@href='https://hislide.io/product/orbit-modern-powerpoint-template/']",
+      "name": "Modern_template_"
+    },
+    "Halloween": {
+      "xpath": "//a[@href='https://hislide.io/product/halloween-powerpoint-template-free/']",
+      "name": "Halloween_template_"
     }
+  }
 }

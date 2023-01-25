@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import ElementClickInterceptedException
+import os
 
 
 def selenium_login(logger, dictionary: dict, driver):
@@ -98,7 +99,7 @@ def choose_template(xpath, driver, logger):
             logger.error(f"Unexpected error: \n{format_exc()}")
 
 
-def downloading(driver, logger):
+def downloading(driver, logger, template, path, dictionary):
     """
     :param driver: webdriver (ChromeOptions(), FirefoxProfile()...)
     :param logger: logger() to write logs
@@ -116,11 +117,10 @@ def downloading(driver, logger):
             button.click()
             time.sleep(10)
 
-            # logger.info("Click close button after downloading.")
-            # WebDriverWait(driver, 20).until(
-            #     EC.element_to_be_clickable(
-            #         (By.CSS_SELECTOR, "button[class='remember-popup-close-button fancybox-button fancybox-button--close']"))).click()
-            # time.sleep(5)
+            file_name = dictionary["templates"][template]["name"]
+            for elem in os.listdir(path):
+                if elem.startswith("0"):  # key word, which all files start with
+                    os.rename(rf"{path}\{elem}", rf"{path}\{file_name}{elem}")
 
             result = True
             break
@@ -128,6 +128,5 @@ def downloading(driver, logger):
         except ElementClickInterceptedException:
             logger.warning("Download button click was intercepted.\nTrying to click on the button again.")
             driver.execute_script("arguments[0].click()", button)
-            result = False
 
     return result
