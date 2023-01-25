@@ -23,20 +23,25 @@ def selenium_login(logger, dictionary: dict, driver):
 
         logger.info('Login through https://hislide.io/my-account/')
         driver.get("https://hislide.io/my-account/")
-        # time.sleep(3)
+        time.sleep(3)
+
+        logger.info("Click on close button")
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[@class='Button__Block-sc-1c0eo6i-0 bhCgZe ModalControl__Control-sc-1dl29es-0 cLmiHt jsx-813992241 eapp-popup-control-close-component transition-exited']"))).click()
+        time.sleep(5)
 
         logger.info('Filled in username')
         login_input = driver.find_element(By.ID, 'username')
         login_input.clear()
         login_input.send_keys(login)
-        # time.sleep(2)
+        time.sleep(2)
 
         logger.info('Filled in password')
         password_input = driver.find_element(By.ID, 'password')
         password_input.clear()
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
-        # time.sleep(5)
+        time.sleep(5)
 
     except Exception as e:
         logger.error(f"Unexpected error: \n{format_exc()}")
@@ -56,12 +61,14 @@ def selenium_searching(logger, driver):
     try:
         logger.info("Click on 'PowerPoint Templates'.")
         WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "a[href='https://hislide.io/powerpoint-template/']"))).click()
+            EC.element_to_be_clickable((By.XPATH, "//a[@href='/']"))).click()
+        time.sleep(5)
 
         logger.info("Click on 'Free PowerPoint Templates'.")
         WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable(
-                (By.CSS_SELECTOR, "a[href='https://hislide.io/free-powerpoint-templates/']"))).click()
+                (By.XPATH, "//a[@href='https://hislide.io/shop/?filter_license=free']"))).click()
+        time.sleep(5)
 
         return None
 
@@ -69,23 +76,23 @@ def selenium_searching(logger, driver):
         logger.error(f"Unexpected error: \n{format_exc()}")
 
 
-def choose_template(css, driver, logger):
+def choose_template(xpath, driver, logger):
     """Choose current template"""
-    retries = 4
+    retries = 142
     for i in range(retries):
         page = i+2
         try:
             logger.info("Click on current Powerpoint template.")
-            WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, css))).click()
+            WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath))).click()
+            time.sleep(5)
             break
 
         except TimeoutException:
             logger.info(f"Click on {page} page")
-            css_page = "a[href='https://hislide.io/free-powerpoint-templates/page/" + str(page) + "/']"
-            print(css_page)
+            css_page = "//a[@class='next page-numbers']"
             WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, css_page))).click()
+                    (By.XPATH, css_page))).click()
 
         except Exception as e:
             logger.error(f"Unexpected error: \n{format_exc()}")
@@ -105,19 +112,15 @@ def downloading(driver, logger):
         try:
             logger.info("Click button 'Download Now'.")
             button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[@class='purchase-method-download']")))
+                EC.element_to_be_clickable((By.XPATH, "//div[@class='product__btn']")))
             button.click()
             time.sleep(10)
 
-            logger.info("Click close button after downloading.")
-            WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, "button[class='remember-popup-close-button fancybox-button fancybox-button--close']"))).click()
-
-            logger.info("Click on 'Free PowerPoint Templates'.")
-            WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, "a[href='https://hislide.io/free-powerpoint-templates/']"))).click()
+            # logger.info("Click close button after downloading.")
+            # WebDriverWait(driver, 20).until(
+            #     EC.element_to_be_clickable(
+            #         (By.CSS_SELECTOR, "button[class='remember-popup-close-button fancybox-button fancybox-button--close']"))).click()
+            # time.sleep(5)
 
             result = True
             break

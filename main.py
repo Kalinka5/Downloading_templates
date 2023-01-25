@@ -34,9 +34,10 @@ def main(loger):
 
         selenium_login(loger, config, driver)
         selenium_searching(loger, driver)
-        choose_template("a[href='https://hislide.io/product/halloween-powerpoint-template-free/']", driver, logger)
+        choose_template("//a[@href='https://hislide.io/product/orbit-modern-powerpoint-template/']", driver, logger)
         downloading(driver, logger)
-        choose_template("a[href='https://hislide.io/product/business-ppt-slides-free-download/']", driver, logger)
+        selenium_searching(loger, driver)
+        choose_template("//a[@href='https://hislide.io/product/halloween-powerpoint-template-free/']", driver, logger)
         downloading(driver, logger)
 
     finally:
