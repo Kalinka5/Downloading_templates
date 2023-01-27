@@ -1,6 +1,6 @@
 import json
 from logger import Logger
-from selenium_func import selenium_login, selenium_working
+from selenium_func import selenium_login, open_all_templates, selenium_working
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 import os
@@ -33,6 +33,8 @@ def main(loger):
         driver.implicitly_wait(10)
 
         selenium_login(loger, config, driver)
+
+        open_all_templates(loger, driver)
 
         for template in config["templates"]:
             selenium_working(loger, driver, config, template, path)

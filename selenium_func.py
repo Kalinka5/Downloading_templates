@@ -11,6 +11,17 @@ from selenium import webdriver
 from logger import Logger
 
 
+def every_downloads_chrome(driver):
+    if not driver.current_url.startswith("chrome://downloads"):
+        driver.get("chrome://downloads/")
+    return driver.execute_script("""
+        var items = document.querySelector('downloads-manager')
+            .shadowRoot.getElementById('downloadsList').items;
+        if (items.every(e => e.state === "COMPLETE"))
+            return items.map(e => e.fileUrl || e.file_url);
+        """)
+
+
 def selenium_login(logger: Logger, dictionary: dict, driver: webdriver):
     """
     This function open Chrome web page, then login to account in HiSlide.
@@ -51,7 +62,7 @@ def selenium_login(logger: Logger, dictionary: dict, driver: webdriver):
         driver.quit()
 
 
-def searching(logger, driver):
+def open_all_templates(logger, driver):
     """
     This function will search all stores and click in it then click on yesterday button,
     and then it will click on "Download table (.xls)" button, finally rename file_name to shop name.
@@ -59,17 +70,20 @@ def searching(logger, driver):
     :param logger: logger to write logs
     :param driver: Chrome option where selenium will do all work
     """
+    try:
+        logger.info("Click on 'PowerPoint Templates'.")
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[@href='/']"))).click()
+        time.sleep(5)
 
-    logger.info("Click on 'PowerPoint Templates'.")
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//a[@href='/']"))).click()
-    time.sleep(5)
+        logger.info("Click on 'Free PowerPoint Templates'.")
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//a[@href='https://hislide.io/shop/?filter_license=free']"))).click()
+        time.sleep(5)
 
-    logger.info("Click on 'Free PowerPoint Templates'.")
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "//a[@href='https://hislide.io/shop/?filter_license=free']"))).click()
-    time.sleep(5)
+    except Exception as e:
+        logger.error(f"Unexpected error: \n{format_exc()}")
 
 
 def choose_template(xpath: str, driver: webdriver, logger: Logger):
@@ -117,12 +131,26 @@ def downloading(driver: webdriver, logger: Logger, template: str, path: str, dic
             button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, "//div[@class='product__btn']")))
             button.click()
-            time.sleep(10)
+
+            # waits for all the files to be completed
+            WebDriverWait(driver, 120, 1).until(every_downloads_chrome)
+            time.sleep(5)
 
             file_name = dictionary["templates"][template]["name"]
             for elem in os.listdir(path):
                 if elem.startswith("0"):  # key word, which all files start with
                     os.rename(rf"{path}\{elem}", rf"{path}\{file_name}{elem}")
+
+            # Change to Template page
+            logger.info("Change to 'https://hislide.io/' page.")
+            driver.get("https://hislide.io/")
+            time.sleep(5)
+
+            logger.info("Click on 'Free PowerPoint Templates'.")
+            WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//a[@href='https://hislide.io/shop/?filter_license=free']"))).click()
+            time.sleep(5)
 
             break
 
@@ -133,7 +161,7 @@ def downloading(driver: webdriver, logger: Logger, template: str, path: str, dic
 
 def selenium_working(logger: Logger, driver: webdriver, config: dict, template: str, path: str):
     """
-    Use all functions to interact with site: searching, choose_template and downloading.
+    Use all functions to interact with site: choose_template and downloading.
 
     :param logger: logger to write logs
     :param driver: webdriver (ChromeOptions(), FirefoxProfile()...)
@@ -143,7 +171,6 @@ def selenium_working(logger: Logger, driver: webdriver, config: dict, template: 
 
     """
     try:
-        searching(logger, driver)
         choose_template(config["templates"][template]["xpath"], driver, logger)
         downloading(driver, logger, template, path, config)
 
