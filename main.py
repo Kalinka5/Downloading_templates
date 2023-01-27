@@ -1,6 +1,6 @@
 import json
 from logger import Logger
-from selenium_func import selenium_login, selenium_searching, choose_template, downloading
+from selenium_func import selenium_login, selenium_working
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 import os
@@ -14,7 +14,7 @@ def main(loger):
         with open('configs.json') as file:
             config = json.load(file)
 
-        # create a folder where xls files were downloaded.
+        # create a folder where templates will be downloaded.
         if not os.path.exists("Files"):
             os.mkdir("Files")
             loger.info("Create the folder \"Files\"")
@@ -23,21 +23,19 @@ def main(loger):
         path = os.path.abspath("Files")
 
         # Set up Chrome server
-        check_driver(os.path.abspath("chrome_driver"))  # загружает chromedriver последней версии
+        check_driver(os.path.abspath("chrome_driver"))  # download chromedriver last version
         options = webdriver.ChromeOptions()
         s = Service(r'chrome_driver\chromedriver.exe')  # Path to the installed ChromeDriver
         prefs = {"download.default_directory": path}  # Path to the folder "Files"
         options.add_experimental_option("prefs", prefs)
-        options.add_argument("--start-maximized")
+        options.add_argument("--start-maximized")  # open Chrome with full window
         driver = webdriver.Chrome(service=s, options=options)
         driver.implicitly_wait(10)
 
         selenium_login(loger, config, driver)
 
         for template in config["templates"]:
-            selenium_searching(loger, driver)
-            choose_template(config["templates"][template]["xpath"], driver, logger)
-            downloading(driver, logger, template, path, config)
+            selenium_working(loger, driver, config, template, path)
 
     finally:
         driver.close()
