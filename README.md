@@ -60,7 +60,7 @@ def choose_template(xpath: str, driver: webdriver, logger: Logger):
 
 :small_red_triangle: Last but not least, downloading. It click big, green **Download** button. Then goes to another page *downloads*. The program will wait until the files appear in the folder.
 
-:small_red_triangle: Returns to the initial page. Furthermore, click **free** section:arrow_forward::
+:small_red_triangle: Returns to the initial page. Furthermore, click **free** section and download one more template:arrow_forward::
 
 ![downloading](https://user-images.githubusercontent.com/106172806/215406989-40ec227d-7370-4760-bd6e-40e5924acc2e.gif)
 
