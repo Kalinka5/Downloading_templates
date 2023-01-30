@@ -1,7 +1,8 @@
 # Selenium
-![Pypi](https://img.shields.io/pypi/v/selenium?color=orange)
-![Python](https://img.shields.io/pypi/pyversions/selenium?color=gree&style=plastic)
-![Forks](https://img.shields.io/github/forks/Kalinka5/detective_game?style=social)
+![Pypi](https://img.shields.io/pypi/v/Selenium?color=orange)
+![Python](https://img.shields.io/pypi/pyversions/Selenium?color=gree&style=plastic)
+![Forks](https://img.shields.io/github/forks/Kalinka5/Selenium?style=social)
+![Stars](https://img.shields.io/github/stars/Kalinka5/Selenium?style=social)
 
 :diamond_shape_with_a_dot_inside: To begin with, program is **Selenium** practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
 
