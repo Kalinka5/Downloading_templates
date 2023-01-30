@@ -18,8 +18,11 @@ In addition, I'm downloading certain tempalates **Halloween** and **Modern** the
 ___
 
 ## *Example*
+![login](https://user-images.githubusercontent.com/106172806/215406919-1a10630a-0941-47e5-8838-969060191cde.gif)
 
+![choose_the_template](https://user-images.githubusercontent.com/106172806/215406964-dab374b0-79e8-4281-baf6-f9cd74affa10.gif)
 
+![downloading](https://user-images.githubusercontent.com/106172806/215406989-40ec227d-7370-4760-bd6e-40e5924acc2e.gif)
 ___
 
 <picture>
