@@ -18,11 +18,64 @@ In addition, I'm downloading certain tempalates **Halloween** and **Modern** the
 ___
 
 ## *Example*
+As soon as you run this code, you can see *login page* where program will sign in to your account HiSlide.
+
 ![login](https://user-images.githubusercontent.com/106172806/215406919-1a10630a-0941-47e5-8838-969060191cde.gif)
+
+
+Further, program automatically choose page **All Templates**, after that click **free** section.
+
+To choose the template I use function *choose_template()*:
+
+```python
+def choose_template(xpath: str, driver: webdriver, logger: Logger):
+    """
+    Choose current template on page. And if program don't found it, click on next page.
+
+    :param xpath: element's xpath on webpage
+    :param driver: webdriver (ChromeOptions(), FirefoxProfile()...)
+    :param logger: logger to write logs
+    """
+
+    # Count of pages in free section
+    retries = 142
+    for i in range(retries):
+        page = i+2
+        try:
+            logger.info("Click on current Powerpoint template.")
+            WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath))).click()
+            time.sleep(5)
+            break
+
+        except TimeoutException:
+            logger.info(f"Click on {page} page")
+            css_page = "//a[@class='next page-numbers']"
+            WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, css_page))).click()
+```
+The program wait 20 sec and if It doesn't find the certain template, it will click to the next page. As you can see below, It will click on the second page.
 
 ![choose_the_template](https://user-images.githubusercontent.com/106172806/215406964-dab374b0-79e8-4281-baf6-f9cd74affa10.gif)
 
+Last but not least, downloading. It click big, green **Download** button. Then goes to another page *downloads*. The program will wait until the files appear in the folder.
+
+Returns to the initial page. Furthermore, click **free** section.
+
 ![downloading](https://user-images.githubusercontent.com/106172806/215406989-40ec227d-7370-4760-bd6e-40e5924acc2e.gif)
+
+Additional feature of this program is renaming files when they are downloaded.
+This piece of code renames files:
+```python
+# Renaming all downloaded files 
+file_name = dictionary["templates"][template]["name"]
+for elem in os.listdir(path):
+    if elem.startswith("0"):  # key word, which all files start with
+        os.rename(rf"{path}\{elem}", rf"{path}\{file_name}{elem}")
+```
+As a result, you will get these files:
+
+
 ___
 
 <picture>

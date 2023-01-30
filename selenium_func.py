@@ -95,6 +95,7 @@ def choose_template(xpath: str, driver: webdriver, logger: Logger):
     :param logger: logger to write logs
     """
 
+    # Count of pages in free section
     retries = 142
     for i in range(retries):
         page = i+2
@@ -127,7 +128,7 @@ def downloading(driver: webdriver, logger: Logger, template: str, path: str, dic
     retries = 3
     for i in range(retries):
         try:
-            logger.info("Click button 'Download Now'.")
+            logger.info("Click button 'Download'.")
             button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, "//div[@class='product__btn']")))
             button.click()
@@ -135,7 +136,8 @@ def downloading(driver: webdriver, logger: Logger, template: str, path: str, dic
             # waits for all the files to be completed
             WebDriverWait(driver, 120, 1).until(every_downloads_chrome)
             time.sleep(5)
-
+            
+            # Renaming all downloaded files 
             file_name = dictionary["templates"][template]["name"]
             for elem in os.listdir(path):
                 if elem.startswith("0"):  # key word, which all files start with
