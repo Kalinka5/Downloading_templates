@@ -75,6 +75,7 @@ for elem in os.listdir(path):
 ```
 As a result, you will get these files:
 
+![files](https://user-images.githubusercontent.com/106172806/215419583-50ea9ee1-1db8-40e6-bb5d-26aae9cfc9e1.jpg)
 
 ___
 
