@@ -3,29 +3,29 @@
 ![Python](https://img.shields.io/pypi/pyversions/selenium?color=gree&style=plastic)
 ![Forks](https://img.shields.io/github/forks/Kalinka5/detective_game?style=social)
 
-To begin with, program is **Selenium** practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
+:diamond_shape_with_a_dot_inside: To begin with, program is **Selenium** practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
 
-In this code you can see simple examles of using selenium webdriver from *login in website* to *how to wait downloading files and then rename this file in our folder*.
+:diamond_shape_with_a_dot_inside: In this code you can see simple examples of using selenium webdriver from *login in website* to *how to wait downloading files and then rename this file in our folder*:file_folder:.
 ___
 
 ## *Usage*
-First of all, **Selenium** uses decently different web drivers like *Chrome, Opera, Firefox* etc. The program uses **Chrome driver**, which always updates to new version when you run the program.
+:small_orange_diamond: First of all, **Selenium** uses decently different web drivers like *Chrome, Opera, Firefox* etc. The program uses **Chrome driver**, which always updates to new version when you run the program.
 
-Also, you can use my config with HiSlide account or you can [*register a new own account*](https://hislide.io/my-account/) and work with it. 
+:small_orange_diamond: Also, you can use my config with HiSlide account or you can [*register a new own account*](https://hislide.io/my-account/) and work with it. 
 
-In addition, I'm downloading certain tempalates **Halloween** and **Modern** themes, but you can download any other templates. To make this, you should change config file.
+:small_orange_diamond: In addition, I'm downloading certain tempalates **Halloween** and **Modern** themes, but you can download any other templates. To make this, you should change *config file*:gear:.
 
 ___
 
 ## *Example*
-As soon as you run this code, you can see *login page* where program will sign in to your account HiSlide.
+:small_red_triangle: As soon as you run this code, you can see *login page* where program will sign in to your account HiSlide:arrow_forward::
 
 ![login](https://user-images.githubusercontent.com/106172806/215406919-1a10630a-0941-47e5-8838-969060191cde.gif)
 
 
-Further, program automatically choose page **All Templates**, after that click **free** section.
+:small_red_triangle: Further, program automatically choose page **All Templates**, after that click **free** section.
 
-To choose the template I use function *choose_template()*:
+:small_red_triangle: To choose the template I use function *choose_template()*:
 
 ```python
 def choose_template(xpath: str, driver: webdriver, logger: Logger):
@@ -54,18 +54,18 @@ def choose_template(xpath: str, driver: webdriver, logger: Logger):
                 EC.element_to_be_clickable(
                     (By.XPATH, css_page))).click()
 ```
-The program wait 20 sec and if It doesn't find the certain template, it will click to the next page. As you can see below, It will click on the second page.
+:small_red_triangle: The program wait 20 sec and if It doesn't find the certain template, it will click to the next page. As you can see below, It will click on the second page:arrow_forward::
 
 ![choose_the_template](https://user-images.githubusercontent.com/106172806/215406964-dab374b0-79e8-4281-baf6-f9cd74affa10.gif)
 
-Last but not least, downloading. It click big, green **Download** button. Then goes to another page *downloads*. The program will wait until the files appear in the folder.
+:small_red_triangle: Last but not least, downloading. It click big, green **Download** button. Then goes to another page *downloads*. The program will wait until the files appear in the folder.
 
-Returns to the initial page. Furthermore, click **free** section.
+:small_red_triangle: Returns to the initial page. Furthermore, click **free** section:arrow_forward::
 
 ![downloading](https://user-images.githubusercontent.com/106172806/215406989-40ec227d-7370-4760-bd6e-40e5924acc2e.gif)
 
-Additional feature of this program is renaming files when they are downloaded.
-This piece of code renames files:
+:small_red_triangle: Additional feature of this program is renaming files when they are downloaded.\
+:small_red_triangle: This piece of code renames files:
 ```python
 # Renaming all downloaded files 
 file_name = dictionary["templates"][template]["name"]
@@ -73,7 +73,7 @@ for elem in os.listdir(path):
     if elem.startswith("0"):  # key word, which all files start with
         os.rename(rf"{path}\{elem}", rf"{path}\{file_name}{elem}")
 ```
-As a result, you will get these files:
+:small_red_triangle: As a result, you will get these files:
 
 ![files](https://user-images.githubusercontent.com/106172806/215419583-50ea9ee1-1db8-40e6-bb5d-26aae9cfc9e1.jpg)
 
