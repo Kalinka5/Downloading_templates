@@ -4,9 +4,14 @@
 ![Forks](https://img.shields.io/github/forks/Kalinka5/Selenium?style=social)
 ![Stars](https://img.shields.io/github/stars/Kalinka5/Selenium?style=social)
 
-:diamond_shape_with_a_dot_inside: To begin with, program is **Selenium** practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
+:diamond_shape_with_a_dot_inside: To begin with, program is [**Selenium**](https://www.selenium.dev/selenium/docs/api/py/api.html) practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
 
-:diamond_shape_with_a_dot_inside: In this code you can see simple examples of using selenium webdriver from *login in website* to *how to wait downloading files and then rename this file in our folder*:file_folder:.
+:diamond_shape_with_a_dot_inside: In this code you can see simple examples of using selenium webdriver: 
++ *login in website*;
++ *click different buttons*;
++ *search template on page and if doesn't found it, goes to the next page*;
++ *wait until files are downloaded*;
++ *rename files in our folder*.
 ___
 
 ## *Usage*
