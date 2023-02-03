@@ -1,8 +1,8 @@
 # Downloading_templates
-![Pypi](https://img.shields.io/pypi/v/Selenium?color=orange)
-![Python](https://img.shields.io/pypi/pyversions/Selenium?color=gree&style=plastic)
-![Forks](https://img.shields.io/github/forks/Kalinka5/Selenium?style=social)
-![Stars](https://img.shields.io/github/stars/Kalinka5/Selenium?style=social)
+![Pypi](https://img.shields.io/pypi/v/selenium?color=orange&style=plastic)
+![Python](https://img.shields.io/pypi/pyversions/selenium?color=gree&style=plastic)
+![Forks](https://img.shields.io/github/forks/Kalinka5/Downloading_templates?style=social)
+![Stars](https://img.shields.io/github/stars/Kalinka5/Downloading_templates?style=social)
 
 :diamond_shape_with_a_dot_inside: To begin with, program is [**Selenium**](https://www.selenium.dev/selenium/docs/api/py/api.html) practicing with website [HiSlide](https://hislide.io/) where you can download model of different PowerPoint tempalates. 
 
