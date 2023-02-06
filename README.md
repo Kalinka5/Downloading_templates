@@ -79,7 +79,7 @@ for elem in os.listdir(path):
     if elem.startswith("0"):  # key word, which all files start with
         os.rename(rf"{path}\{elem}", rf"{path}\{file_name}{elem}")
 ```
-:small_red_triangle: As a result, you will get these files:
+:white_check_mark: As a result, you will get these files:
 
 ![files](https://user-images.githubusercontent.com/106172806/215419583-50ea9ee1-1db8-40e6-bb5d-26aae9cfc9e1.jpg)
 
